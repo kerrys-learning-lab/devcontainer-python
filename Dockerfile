@@ -34,7 +34,7 @@ RUN usermod -a -G docker vscode
 # -- Python 3.12
 RUN apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:deadsnakes/ppa && \
-    apt-get install -y python3.12
+    apt-get install -y python3.11
 
 # -- Poetry
 RUN export POETRY_HOME=/opt/poetry && \
