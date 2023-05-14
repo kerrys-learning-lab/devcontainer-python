@@ -5,6 +5,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 # https://bobcares.com/blog/debian_frontendnoninteractive-docker/
 ARG DEBIAN_FRONTEND=noninteractive
+ARG POETRY_VERSION=1.4.2
 
 SHELL ["/bin/bash", "-c"]
 
@@ -31,14 +32,9 @@ RUN apt-get install -y  ca-certificates \
 
 RUN usermod -a -G docker vscode
 
-# -- Python 3.12
-RUN apt-get install -y software-properties-common && \
-    add-apt-repository -y ppa:deadsnakes/ppa && \
-    apt-get install -y python3.11
-
 # -- Poetry
 RUN export POETRY_HOME=/opt/poetry && \
-    export POETRY_VERSION=1.3.0 && \
+    export POETRY_VERSION=${POETRY_VERSION} && \
     curl -sSL https://install.python-poetry.org | python3 - && \
     install -o root -g root -m 555 /opt/poetry/bin/poetry /usr/local/bin/poetry
 
